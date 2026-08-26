@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tasky/features/add_task/add_task_screen.dart';
+import 'package:tasky/features/home/components/high_priority_tasks_widget.dart';
+import 'package:tasky/features/home/components/sliver_task_list_widget.dart';
 import 'package:tasky/models/task_model.dart';
-import 'package:tasky/screens/add_task_screen.dart';
-import 'package:tasky/widgets/high_priority_tasks_widget.dart';
-import 'package:tasky/widgets/sliver_task_list_widget.dart';
 
-import '../core/services/preferences_manager.dart';
-import '../widgets/achieved_task_widget.dart';
+import '../../core/services/preferences_manager.dart';
+import 'components/achieved_task_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

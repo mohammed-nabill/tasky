@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 
-import '../core/enums/task_item_actions_enum.dart';
-import '../core/services/preferences_manager.dart';
-import '../core/theme/theme_controller.dart';
-import '../core/widgets/custom_checkbox.dart';
-import '../core/widgets/custom_text_form_field.dart';
+import '../enums/task_item_actions_enum.dart';
+import '../services/preferences_manager.dart';
+import '../theme/theme_controller.dart';
+import '../widgets/custom_checkbox.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({

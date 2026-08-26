@@ -1,20 +1,20 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/components/task_list_widget.dart';
 
-import '../core/services/preferences_manager.dart';
-import '../models/task_model.dart';
-import '../widgets/task_list_widget.dart';
+import '../../core/services/preferences_manager.dart';
+import '../../models/task_model.dart';
 
-class CompleteTasksScreen extends StatefulWidget {
-  const CompleteTasksScreen({super.key});
+class TasksScreen extends StatefulWidget {
+  const TasksScreen({super.key});
 
   @override
-  State<CompleteTasksScreen> createState() => _CompleteTasksScreenState();
+  State<TasksScreen> createState() => _TasksScreenState();
 }
 
-class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
-  List<TaskModel> completeTasks = [];
+class _TasksScreenState extends State<TasksScreen> {
+  List<TaskModel> todoTasks = [];
 
   @override
   void initState() {
@@ -28,9 +28,9 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
       final taskAfterDecode = jsonDecode(encodedTask) as List<dynamic>;
 
       setState(() {
-        completeTasks = taskAfterDecode
+        todoTasks = taskAfterDecode
             .map((element) => TaskModel.fromJson(element))
-            .where((element) => element.isDone)
+            .where((element) => element.isDone == false)
             .toList();
       });
     }
@@ -45,7 +45,7 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
           .toList();
       tasks.removeWhere((task) => task.id == id);
       setState(() {
-        completeTasks.removeWhere((task) => task.id == id);
+        todoTasks.removeWhere((task) => task.id == id);
       });
       final updatedTask = tasks.map((element) => element.toJson()).toList();
       PreferencesManager().setString("tasks", jsonEncode(updatedTask));
@@ -60,7 +60,7 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
         Padding(
           padding: const EdgeInsets.all(18.0),
           child: Text(
-            "Completed Tasks",
+            "To Do Tasks",
             style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
@@ -69,10 +69,10 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
             padding: EdgeInsets.all(16),
             child: TaskListWidget(
               emptyMassage: "No Task Found",
-              tasks: completeTasks,
+              tasks: todoTasks,
               onTap: (bool? value, int? index) async {
                 setState(() {
-                  completeTasks[index!].isDone = !completeTasks[index].isDone;
+                  todoTasks[index!].isDone = !todoTasks[index].isDone;
                 });
 
                 final allData = PreferencesManager().getString("tasks");
@@ -81,9 +81,10 @@ class _CompleteTasksScreenState extends State<CompleteTasksScreen> {
                       .map((toElement) => TaskModel.fromJson(toElement))
                       .toList();
                   final int newIndex = allDataList.indexWhere(
-                    (e) => e.id == completeTasks[index!].id,
+                    (e) => e.id == todoTasks[index!].id,
                   );
-                  allDataList[newIndex] = completeTasks[index!];
+                  allDataList[newIndex] = todoTasks[index!];
+
                   PreferencesManager().setString(
                     "tasks",
                     jsonEncode(allDataList),
