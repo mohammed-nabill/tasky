@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 
+import '../constants/storage_key.dart';
 import '../enums/task_item_actions_enum.dart';
 import '../services/preferences_manager.dart';
 import '../theme/theme_controller.dart';
@@ -175,7 +176,9 @@ class TaskItemWidget extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (form.currentState!.validate()) {
-                      final taskJson = PreferencesManager().getString("tasks");
+                      final taskJson = PreferencesManager().getString(
+                        StorageKey.tasks,
+                      );
                       List listTasks = [];
                       if (taskJson != null) {
                         listTasks = jsonDecode(taskJson);
@@ -192,7 +195,10 @@ class TaskItemWidget extends StatelessWidget {
                       );
                       listTasks[index] = newModel;
                       final taskEncode = jsonEncode(listTasks);
-                      await PreferencesManager().setString("tasks", taskEncode);
+                      await PreferencesManager().setString(
+                        StorageKey.tasks,
+                        taskEncode,
+                      );
                       Navigator.of(context).pop(true);
                     }
                   },

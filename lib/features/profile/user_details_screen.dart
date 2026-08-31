@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/widgets/custom_text_form_field.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/services/preferences_manager.dart';
 
 class UserDetailsScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
   void _getName() async {
     setState(() {
-      name = PreferencesManager().getString("name") ?? '';
+      name = PreferencesManager().getString(StorageKey.userName) ?? '';
       userNameController.value = TextEditingValue(text: name);
       isLoadingName = false;
     });
@@ -91,7 +92,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 onPressed: () async {
                   if (_key.currentState!.validate()) {
                     await PreferencesManager().setString(
-                      "name",
+                      StorageKey.userName,
                       userNameController.text,
                     );
                     await PreferencesManager().setString(

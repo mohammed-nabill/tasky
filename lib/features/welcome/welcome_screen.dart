@@ -3,6 +3,7 @@ import 'package:tasky/core/widgets/custom_svg_picture.dart';
 import 'package:tasky/core/widgets/custom_text_form_field.dart';
 import 'package:tasky/features/navigation/main_Screen.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/services/preferences_manager.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -90,7 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                         onPressed: () async {
                           if (_key.currentState!.validate()) {
                             await PreferencesManager().setString(
-                              "name",
+                              StorageKey.userName,
                               _name.value.text,
                             );
                             Navigator.pushReplacement(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tasky/core/constants/storage_key.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/profile/user_details_screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
@@ -32,11 +33,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _loadData() async {
     setState(() {
-      name = PreferencesManager().getString("name") ?? '';
+      name = PreferencesManager().getString(StorageKey.userName) ?? '';
       motivationQuote =
-          PreferencesManager().getString("motivationQuote") ??
+          PreferencesManager().getString(StorageKey.motivationQuote) ??
           "One task at a time. One step closer.";
-      userImage = PreferencesManager().getString('user_image');
+      userImage = PreferencesManager().getString(StorageKey.userImage);
 
       isLoading = false;
     });
@@ -160,8 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   contentPadding: EdgeInsets.zero,
                   onTap: () async {
                     PreferencesManager().remove("motivationQuote");
-                    PreferencesManager().remove("name");
-                    PreferencesManager().remove("tasks");
+                    PreferencesManager().remove(StorageKey.userName);
+                    PreferencesManager().remove(StorageKey.tasks);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
@@ -249,6 +250,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _saveImage(XFile file) async {
     final appDir = await getApplicationDocumentsDirectory();
     final newFile = await File(file.path).copy('${appDir.path}/${file.name}');
-    PreferencesManager().setString("user_image", newFile.path);
+    PreferencesManager().setString(StorageKey.userImage, newFile.path);
   }
 }
