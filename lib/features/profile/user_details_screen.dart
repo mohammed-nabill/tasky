@@ -39,7 +39,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   void _getMotivationQuote() async {
     setState(() {
       motivationQuote =
-          PreferencesManager().getString("motivationQuote") ??
+          PreferencesManager().getString(StorageKey.motivationQuote) ??
           "One task at a time. One step closer.";
       motivationQuoteController.value = TextEditingValue(text: motivationQuote);
       isLoadingMotivationQuote = false;
@@ -96,7 +96,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       userNameController.text,
                     );
                     await PreferencesManager().setString(
-                      "motivationQuote",
+                      StorageKey.motivationQuote,
                       motivationQuoteController.text,
                     );
                     Navigator.of(context).pop(true);

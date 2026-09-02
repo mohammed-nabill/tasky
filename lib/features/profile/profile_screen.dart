@@ -160,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   onTap: () async {
-                    PreferencesManager().remove("motivationQuote");
+                    PreferencesManager().remove(StorageKey.motivationQuote);
                     PreferencesManager().remove(StorageKey.userName);
                     PreferencesManager().remove(StorageKey.tasks);
                     Navigator.pushAndRemoveUntil(
