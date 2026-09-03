@@ -19,11 +19,10 @@ class TasksController with ChangeNotifier {
     final encodedTask = PreferencesManager().getString(StorageKey.tasks);
     if (encodedTask != null) {
       final taskAfterDecode = jsonDecode(encodedTask) as List<dynamic>;
-
-      todoTasks = taskAfterDecode
+      tasks = taskAfterDecode
           .map((element) => TaskModel.fromJson(element))
-          .where((element) => element.isDone == false)
           .toList();
+      todoTasks = tasks.where((element) => element.isDone == false).toList();
     }
     notifyListeners();
   }
@@ -42,6 +41,6 @@ class TasksController with ChangeNotifier {
     final int newIndex = tasks.indexWhere((e) => e.id == todoTasks[index].id);
     tasks[newIndex] = todoTasks[index];
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
-    notifyListeners();
+    _loadTasks();
   }
 }
