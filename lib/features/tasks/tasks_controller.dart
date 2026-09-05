@@ -23,6 +23,7 @@ class TasksController with ChangeNotifier {
           .map((element) => TaskModel.fromJson(element))
           .toList();
       todoTasks = tasks.where((element) => element.isDone == false).toList();
+      completeTasks = tasks.where((element) => element.isDone).toList();
     }
     notifyListeners();
   }
@@ -30,6 +31,7 @@ class TasksController with ChangeNotifier {
   void deleteTask(int id) {
     tasks.removeWhere((task) => task.id == id);
     todoTasks.removeWhere((task) => task.id == id);
+    completeTasks.removeWhere((task) => task.id == id);
     final updatedTask = tasks.map((element) => element.toJson()).toList();
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
     notifyListeners();
@@ -40,6 +42,17 @@ class TasksController with ChangeNotifier {
     todoTasks[index].isDone = !todoTasks[index].isDone;
     final int newIndex = tasks.indexWhere((e) => e.id == todoTasks[index].id);
     tasks[newIndex] = todoTasks[index];
+    PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
+    _loadTasks();
+  }
+
+  void doneCompleteTask(bool? value, int? index) async {
+    if (index == null) return;
+    completeTasks[index].isDone = !completeTasks[index].isDone;
+    final int newIndex = tasks.indexWhere(
+      (e) => e.id == completeTasks[index].id,
+    );
+    tasks[newIndex] = completeTasks[index];
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
     _loadTasks();
   }
