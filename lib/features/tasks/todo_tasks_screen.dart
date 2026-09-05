@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_list_widget.dart';
-import 'package:tasky/features/tasks/tasks_controller.dart';
+import 'package:tasky/features/tasks/controller/tasks_controller.dart';
 
 class ToDoTasksScreen extends StatelessWidget {
   const ToDoTasksScreen({super.key});

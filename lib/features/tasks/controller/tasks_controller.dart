@@ -3,13 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 
-import '../../core/constants/storage_key.dart';
-import '../../core/services/preferences_manager.dart';
+import '../../../core/constants/storage_key.dart';
+import '../../../core/services/preferences_manager.dart';
 
 class TasksController with ChangeNotifier {
   List<TaskModel> tasks = [];
   List<TaskModel> todoTasks = [];
   List<TaskModel> completeTasks = [];
+  List<TaskModel> highPriorityTasks = [];
 
   void init() {
     _loadTasks();
@@ -24,6 +25,10 @@ class TasksController with ChangeNotifier {
           .toList();
       todoTasks = tasks.where((element) => element.isDone == false).toList();
       completeTasks = tasks.where((element) => element.isDone).toList();
+      highPriorityTasks = tasks
+          .where((element) => element.highPriority)
+          .toList();
+      highPriorityTasks = highPriorityTasks.reversed.toList();
     }
     notifyListeners();
   }
@@ -32,6 +37,7 @@ class TasksController with ChangeNotifier {
     tasks.removeWhere((task) => task.id == id);
     todoTasks.removeWhere((task) => task.id == id);
     completeTasks.removeWhere((task) => task.id == id);
+    highPriorityTasks.removeWhere((task) => task.id == id);
     final updatedTask = tasks.map((element) => element.toJson()).toList();
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
     notifyListeners();
@@ -53,6 +59,17 @@ class TasksController with ChangeNotifier {
       (e) => e.id == completeTasks[index].id,
     );
     tasks[newIndex] = completeTasks[index];
+    PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
+    _loadTasks();
+  }
+
+  void doneHighPriorityTask(bool? value, int? index) async {
+    if (index == null) return;
+    highPriorityTasks[index].isDone = !highPriorityTasks[index].isDone;
+    final int newIndex = tasks.indexWhere(
+      (e) => e.id == highPriorityTasks[index].id,
+    );
+    tasks[newIndex] = highPriorityTasks[index];
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
     _loadTasks();
   }
