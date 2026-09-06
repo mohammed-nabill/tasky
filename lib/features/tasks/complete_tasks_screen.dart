@@ -9,41 +9,40 @@ class CompleteTasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksController>(
-      create: (_) => TasksController()..init(),
-      builder: (context, _) {
-        final TasksController controller = context.read<TasksController>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                "Completed Tasks",
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Consumer<TasksController>(
-                  builder: (BuildContext context, TasksController value, _) {
+    final TasksController controller = context.read<TasksController>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Text(
+            "Completed Tasks",
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Consumer<TasksController>(
+              builder:
+                  (BuildContext context, TasksController valueController, _) {
                     return TaskListWidget(
                       emptyMassage: "No Task Found",
-                      tasks: value.completeTasks,
+                      tasks: valueController.completeTasks,
                       onTap: (bool? value, int? index) {
-                        controller.doneCompleteTask(value, index);
+                        controller.doneTask(
+                          value,
+                          valueController.completeTasks[index!].id,
+                        );
                       },
                       onDelete: (int id) => controller.deleteTask(id),
                       onEdit: () => controller.init(),
                     );
                   },
-                ),
-              ),
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }

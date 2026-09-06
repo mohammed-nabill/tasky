@@ -9,31 +9,34 @@ class HighPriorityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksController>(
-      create: (BuildContext _) => TasksController()..init(),
-      builder: (context, _) {
-        final TasksController controller = context.read<TasksController>();
-        return Scaffold(
-          appBar: AppBar(title: Text("High Priority Tasks")),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Consumer<TasksController>(
-              builder:
-                  (BuildContext context, TasksController value, Widget? _) {
-                    return TaskListWidget(
-                      emptyMassage: "No Task Found",
-                      tasks: value.highPriorityTasks,
-                      onTap: (bool? value, int? index) async {
-                        controller.doneHighPriorityTask(value, index);
-                      },
-                      onDelete: (int id) => controller.deleteTask(id),
-                      onEdit: () => controller.init(),
+    final TasksController controller = context.read<TasksController>();
+
+    return Scaffold(
+      appBar: AppBar(title: Text("High Priority Tasks")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Consumer<TasksController>(
+          builder:
+              (
+                BuildContext context,
+                TasksController valueController,
+                Widget? _,
+              ) {
+                return TaskListWidget(
+                  emptyMassage: "No Task Found",
+                  tasks: valueController.highPriorityTasks,
+                  onTap: (bool? value, int? index) async {
+                    controller.doneTask(
+                      value,
+                      valueController.highPriorityTasks[index!].id,
                     );
                   },
-            ),
-          ),
-        );
-      },
+                  onDelete: (int id) => controller.deleteTask(id),
+                  onEdit: () => controller.init(),
+                );
+              },
+        ),
+      ),
     );
   }
 }

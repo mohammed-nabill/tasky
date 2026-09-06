@@ -8,6 +8,7 @@ import 'package:tasky/features/home/components/high_priority_tasks_widget.dart';
 import 'package:tasky/features/home/components/sliver_task_list_widget.dart';
 import 'package:tasky/features/home/home_controller.dart';
 
+import '../tasks/controller/tasks_controller.dart';
 import 'components/achieved_task_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -133,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                   );
 
                   if (result != null && result) {
-                    context.read<HomeController>().loadTasks();
+                    context.read<TasksController>().init();
                   }
                 },
                 shape: RoundedRectangleBorder(

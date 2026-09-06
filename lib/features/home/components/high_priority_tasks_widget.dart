@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
-import 'package:tasky/features/home/home_controller.dart';
 import 'package:tasky/features/tasks/high_priority_screen.dart';
 import 'package:tasky/models/task_model.dart';
+
+import '../../tasks/controller/tasks_controller.dart';
 
 class HighPriorityTasksWidget extends StatelessWidget {
   const HighPriorityTasksWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
+    return Consumer<TasksController>(
       builder:
-          (BuildContext context, HomeController controller, Widget? child) {
+          (BuildContext context, TasksController controller, Widget? child) {
             final List<TaskModel> tasks = controller.tasks;
             return Container(
               width: double.infinity,
@@ -67,10 +68,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                                     ),
                                     value: task.isDone,
                                     onChanged: (bool? value) {
-                                      final index = tasks.indexWhere(
-                                        (e) => e.id == task.id,
-                                      );
-                                      controller.doneTask(value, index);
+                                      controller.doneTask(value, task.id);
                                     },
                                     activeColor: Color(0XFF15B86C),
                                   ),
@@ -103,7 +101,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                           builder: (context) => HighPriorityScreen(),
                         ),
                       );
-                      controller.loadTasks();
+                      controller.init();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(16),

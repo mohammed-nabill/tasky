@@ -11,6 +11,9 @@ class TasksController with ChangeNotifier {
   List<TaskModel> todoTasks = [];
   List<TaskModel> completeTasks = [];
   List<TaskModel> highPriorityTasks = [];
+  int totalTasks = 0;
+  int totalDoneTasks = 0;
+  double percentage = 0;
 
   void init() {
     _loadTasks();
@@ -23,54 +26,43 @@ class TasksController with ChangeNotifier {
       tasks = taskAfterDecode
           .map((element) => TaskModel.fromJson(element))
           .toList();
-      todoTasks = tasks.where((element) => element.isDone == false).toList();
-      completeTasks = tasks.where((element) => element.isDone).toList();
-      highPriorityTasks = tasks
-          .where((element) => element.highPriority)
-          .toList();
-      highPriorityTasks = highPriorityTasks.reversed.toList();
+      _loadData();
+      _calculatePercentage();
     }
     notifyListeners();
   }
 
+  void _loadData() {
+    todoTasks = tasks.where((element) => element.isDone == false).toList();
+    completeTasks = tasks.where((element) => element.isDone).toList();
+    highPriorityTasks = tasks.where((element) => element.highPriority).toList();
+    highPriorityTasks = highPriorityTasks.reversed.toList();
+  }
+
+  doneTask(bool? value, int? id) async {
+    final int index = tasks.indexWhere((element) => element.id == id);
+    tasks[index].isDone = !tasks[index].isDone;
+    _loadData();
+    _calculatePercentage();
+
+    final updatedTask = tasks.map((element) => element.toJson()).toList();
+    PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+    _loadTasks();
+  }
+
   void deleteTask(int id) {
     tasks.removeWhere((task) => task.id == id);
-    todoTasks.removeWhere((task) => task.id == id);
-    completeTasks.removeWhere((task) => task.id == id);
-    highPriorityTasks.removeWhere((task) => task.id == id);
+    _loadData();
+    _calculatePercentage();
     final updatedTask = tasks.map((element) => element.toJson()).toList();
     PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
     notifyListeners();
   }
 
-  void doneTask(bool? value, int? index) async {
-    if (index == null) return;
-    todoTasks[index].isDone = !todoTasks[index].isDone;
-    final int newIndex = tasks.indexWhere((e) => e.id == todoTasks[index].id);
-    tasks[newIndex] = todoTasks[index];
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
-    _loadTasks();
-  }
-
-  void doneCompleteTask(bool? value, int? index) async {
-    if (index == null) return;
-    completeTasks[index].isDone = !completeTasks[index].isDone;
-    final int newIndex = tasks.indexWhere(
-      (e) => e.id == completeTasks[index].id,
-    );
-    tasks[newIndex] = completeTasks[index];
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
-    _loadTasks();
-  }
-
-  void doneHighPriorityTask(bool? value, int? index) async {
-    if (index == null) return;
-    highPriorityTasks[index].isDone = !highPriorityTasks[index].isDone;
-    final int newIndex = tasks.indexWhere(
-      (e) => e.id == highPriorityTasks[index].id,
-    );
-    tasks[newIndex] = highPriorityTasks[index];
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(tasks));
-    _loadTasks();
+  _calculatePercentage() {
+    totalTasks = tasks.length;
+    totalDoneTasks = tasks.where((element) => element.isDone).length;
+    percentage = totalTasks == 0 ? 0 : totalDoneTasks / totalTasks;
+    notifyListeners();
   }
 }
