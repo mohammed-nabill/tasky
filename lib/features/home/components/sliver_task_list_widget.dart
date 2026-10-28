@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
 
+import '../../../core/constants/app_sizes.dart';
 import '../../../models/task_model.dart';
 import '../../tasks/controller/tasks_controller.dart';
 
@@ -21,12 +22,15 @@ class SliverTaskListWidget extends StatelessWidget {
                     child: Center(
                       child: Text(
                         emptyMassage ?? "No Data",
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: AppSizes.sp24,
+                        ),
                       ),
                     ),
                   )
                 : SliverPadding(
-                    padding: EdgeInsets.only(bottom: 60),
+                    padding: EdgeInsets.only(bottom: AppSizes.h60),
                     sliver: SliverList.separated(
                       itemCount: tasks.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -39,7 +43,7 @@ class SliverTaskListWidget extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 8);
+                        return SizedBox(height: AppSizes.h8);
                       },
                     ),
                   );

@@ -5,6 +5,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/tasks/high_priority_screen.dart';
 import 'package:tasky/models/task_model.dart';
 
+import '../../../core/constants/app_sizes.dart';
 import '../../tasks/controller/tasks_controller.dart';
 
 class HighPriorityTasksWidget extends StatelessWidget {
@@ -18,10 +19,10 @@ class HighPriorityTasksWidget extends StatelessWidget {
             final List<TaskModel> tasks = controller.tasks;
             return Container(
               width: double.infinity,
-              height: 175,
+              height: AppSizes.h175,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(AppSizes.r20),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,16 +33,16 @@ class HighPriorityTasksWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            left: 16,
-                            bottom: 8,
+                          padding: EdgeInsets.only(
+                            top: AppSizes.h8,
+                            left: AppSizes.w16,
+                            bottom: AppSizes.h8,
                           ),
                           child: Text(
                             "High Priority Tasks",
                             style: TextStyle(
                               color: Color(0xFF15B86C),
-                              fontSize: 14,
+                              fontSize: AppSizes.sp14,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -58,7 +59,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                                 .where((e) => e.highPriority)
                                 .toList()[index];
                             return Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
+                              padding: EdgeInsets.only(left: AppSizes.w5),
                               child: Row(
                                 children: [
                                   Checkbox(
@@ -104,9 +105,9 @@ class HighPriorityTasksWidget extends StatelessWidget {
                       controller.init();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(AppSizes.w16),
                       child: Container(
-                        padding: EdgeInsets.all(8),
+                        padding: EdgeInsets.all(AppSizes.w8),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
                           shape: BoxShape.circle,
@@ -118,8 +119,8 @@ class HighPriorityTasksWidget extends StatelessWidget {
                         ),
                         child: SvgPicture.asset(
                           "assets/images/arrow-up-right.svg",
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.w24,
+                          height: AppSizes.h24,
                           colorFilter: ColorFilter.mode(
                             Theme.of(context).colorScheme.tertiary,
                             BlendMode.srcIn,

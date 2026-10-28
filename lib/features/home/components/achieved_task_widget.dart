@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 
 import '../../tasks/controller/tasks_controller.dart';
 
@@ -15,11 +16,11 @@ class AchievedTasks extends StatelessWidget {
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(AppSizes.r20),
             color: Theme.of(context).colorScheme.primaryContainer,
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(AppSizes.w16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -40,8 +41,8 @@ class AchievedTasks extends StatelessWidget {
                   alignment: AlignmentGeometry.center,
                   children: [
                     SizedBox(
-                      height: 48,
-                      width: 48,
+                      height: AppSizes.h48,
+                      width: AppSizes.w48,
                       child: Transform.rotate(
                         angle: -pi / 2,
                         child: CircularProgressIndicator(
