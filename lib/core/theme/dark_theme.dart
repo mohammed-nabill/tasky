@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/app_sizes.dart';
+
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFF181818),
   useMaterial3: true,
@@ -14,7 +16,7 @@ ThemeData darkTheme = ThemeData(
     foregroundColor: const Color(0xFFFFFCFC),
     titleTextStyle: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 20,
+      fontSize: AppSizes.sp20,
       color: Color(0xFFFFFCFC),
     ),
   ),
@@ -45,65 +47,68 @@ ThemeData darkTheme = ThemeData(
     }),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStateProperty.all(Color(0xFF15B86C)),
-      foregroundColor: WidgetStateProperty.all(Color(0xFFFFFCFC)),
-      textStyle: WidgetStateProperty.all(
-        TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color(0xFF15B86C),
+      foregroundColor: Color(0xFFFFFCFC),
+      minimumSize: Size.fromHeight(AppSizes.h40),
+      textStyle: TextStyle(
+        fontSize: AppSizes.sp14,
+        fontWeight: FontWeight.w500,
       ),
     ),
   ),
   textButtonTheme: TextButtonThemeData(
-    style: ButtonStyle(
-      foregroundColor: WidgetStateProperty.all(Color(0xFFFFFCFC)),
-    ),
+    style: TextButton.styleFrom(foregroundColor: Color(0xFFFFFCFC)),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Color(0xFF15B86C),
     foregroundColor: Color(0xFFFFFCFC),
-    extendedTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    extendedTextStyle: TextStyle(
+      fontSize: AppSizes.sp14,
+      fontWeight: FontWeight.w500,
+    ),
   ),
 
   textTheme: TextTheme(
     displayMedium: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 28,
+      fontSize: AppSizes.sp28,
       color: Color(0xFFFFFFFF),
     ),
     displaySmall: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 24,
+      fontSize: AppSizes.sp24,
       color: Color(0xFFFFFCFC),
     ),
     displayLarge: TextStyle(
       color: Color(0xFFFFFCFC),
-      fontSize: 32,
+      fontSize: AppSizes.sp32,
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(),
     bodyMedium: TextStyle(
       color: Color(0xFFFFFCFC),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(
       color: Color(0xFFFFFCFC),
-      fontSize: 14,
+      fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
     ),
     labelMedium: TextStyle(
       color: Color(0xFFFFFFFF),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
     titleSmall: TextStyle(
       color: Color(0xFFC6C6C6),
-      fontSize: 14,
+      fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
     ),
     titleMedium: TextStyle(
       color: Color(0xFFA0A0A0),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.lineThrough,
       decorationColor: Color(0XFFA0A0A0),
@@ -111,10 +116,10 @@ ThemeData darkTheme = ThemeData(
     ),
     labelLarge: TextStyle(
       color: Color(0xFFFFFCFC),
-      fontSize: 20,
+      fontSize: AppSizes.sp20,
       fontWeight: FontWeight.w400,
     ),
-    titleLarge: TextStyle(color: Colors.white, fontSize: 24),
+    titleLarge: TextStyle(color: Colors.white, fontSize: AppSizes.sp24),
   ),
   inputDecorationTheme: InputDecorationThemeData(
     filled: true,
@@ -129,7 +134,7 @@ ThemeData darkTheme = ThemeData(
     ),
     hintStyle: TextStyle(
       color: Color(0xFF6D6D6D),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
   ),
@@ -145,7 +150,7 @@ ThemeData darkTheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Color(0xFFFFFCFC),
       fontWeight: FontWeight.w400,
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
     ),
   ),
   textSelectionTheme: TextSelectionThemeData(
@@ -165,7 +170,11 @@ ThemeData darkTheme = ThemeData(
     color: Color(0xFF181818),
     elevation: 2,
     labelTextStyle: WidgetStateProperty.all(
-      TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white),
+      TextStyle(
+        fontSize: AppSizes.sp20,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
     ),
     shadowColor: Color(0xFF15B86C),
     shape: RoundedRectangleBorder(

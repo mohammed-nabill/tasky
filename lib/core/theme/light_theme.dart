@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/app_sizes.dart';
+
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFFF6F7F9),
   useMaterial3: true,
@@ -14,7 +16,7 @@ ThemeData lightTheme = ThemeData(
     foregroundColor: const Color(0xFF161F1B),
     titleTextStyle: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 20,
+      fontSize: AppSizes.sp20,
       color: Color(0xFF161F1B),
     ),
   ),
@@ -45,62 +47,67 @@ ThemeData lightTheme = ThemeData(
     }),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStateProperty.all(Color(0xFF15B86C)),
-      foregroundColor: WidgetStateProperty.all(Color(0xFFFFFCFC)),
-      textStyle: WidgetStateProperty.all(
-        TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color(0xFF15B86C),
+      foregroundColor: Color(0xFFFFFCFC),
+      minimumSize: Size.fromHeight(AppSizes.h40),
+      textStyle: TextStyle(
+        fontSize: AppSizes.sp14,
+        fontWeight: FontWeight.w500,
       ),
     ),
   ),
 
   textButtonTheme: TextButtonThemeData(
-    style: ButtonStyle(foregroundColor: WidgetStateProperty.all(Colors.black)),
+    style: TextButton.styleFrom(foregroundColor: Colors.black),
   ),
 
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Color(0xFF15B86C),
     foregroundColor: Color(0xFFFFFCFC),
-    extendedTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    extendedTextStyle: TextStyle(
+      fontSize: AppSizes.sp14,
+      fontWeight: FontWeight.w500,
+    ),
   ),
 
   textTheme: TextTheme(
     displayMedium: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 28,
+      fontSize: AppSizes.sp28,
       color: Color(0xFF161F1B),
     ),
     displaySmall: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 24,
+      fontSize: AppSizes.sp24,
       color: Color(0xFF161F1B),
     ),
     displayLarge: TextStyle(
       color: Color(0xFF161F1B),
-      fontSize: 32,
+      fontSize: AppSizes.sp32,
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(),
     bodyMedium: TextStyle(
       color: Color(0xFF161F1B),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(),
     labelMedium: TextStyle(
       color: Color(0xFF161F1B),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
     titleSmall: TextStyle(
       color: Color(0xFF3A4640),
-      fontSize: 14,
+      fontSize: AppSizes.sp14,
       fontWeight: FontWeight.w400,
     ),
     // for done task
     titleMedium: TextStyle(
       color: Color(0xFF6A6A6A),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.lineThrough,
       decorationColor: Color(0XFF49454F),
@@ -108,10 +115,10 @@ ThemeData lightTheme = ThemeData(
     ),
     labelLarge: TextStyle(
       color: Color(0xFF161F1B),
-      fontSize: 20,
+      fontSize: AppSizes.sp20,
       fontWeight: FontWeight.w400,
     ),
-    titleLarge: TextStyle(color: Colors.black, fontSize: 24),
+    titleLarge: TextStyle(color: Colors.black, fontSize: AppSizes.sp24),
   ),
   inputDecorationTheme: InputDecorationThemeData(
     filled: true,
@@ -134,7 +141,7 @@ ThemeData lightTheme = ThemeData(
     ),
     hintStyle: TextStyle(
       color: Color(0xFF9E9E9E),
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
       fontWeight: FontWeight.w400,
     ),
   ),
@@ -150,7 +157,7 @@ ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(
       color: Color(0xFF161F1B),
       fontWeight: FontWeight.w400,
-      fontSize: 16,
+      fontSize: AppSizes.sp16,
     ),
   ),
   textSelectionTheme: TextSelectionThemeData(
@@ -170,7 +177,11 @@ ThemeData lightTheme = ThemeData(
     color: Color(0xFFF6F7F9),
     elevation: 2,
     labelTextStyle: WidgetStateProperty.all(
-      TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black),
+      TextStyle(
+        fontSize: AppSizes.sp20,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
     ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   ),

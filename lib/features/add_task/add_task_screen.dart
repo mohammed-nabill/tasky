@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/widgets/custom_text_form_field.dart';
 import 'package:tasky/features/add_task/add_task_controller.dart';
 
@@ -67,15 +68,13 @@ class AddTaskScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(MediaQuery.of(context).size.width, 40),
-                    ),
                     onPressed: () {
                       controller.addTask(context);
                     },
                     label: Text("Add Task"),
                     icon: Icon(Icons.add),
                   ),
+                  SizedBox(height: AppSizes.h16),
                 ],
               ),
             ),

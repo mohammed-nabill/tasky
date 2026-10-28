@@ -171,9 +171,6 @@ class TaskItemWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(MediaQuery.of(context).size.width, 40),
-                  ),
                   onPressed: () async {
                     if (form.currentState!.validate()) {
                       final taskJson = PreferencesManager().getString(

@@ -8,6 +8,7 @@ import 'package:tasky/features/home/components/high_priority_tasks_widget.dart';
 import 'package:tasky/features/home/components/sliver_task_list_widget.dart';
 import 'package:tasky/features/home/home_controller.dart';
 
+import '../../core/constants/app_sizes.dart';
 import '../tasks/controller/tasks_controller.dart';
 import 'components/achieved_task_widget.dart';
 
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       create: (BuildContext context) => HomeController()..init(),
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.w16),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 16),
+                    SizedBox(height: AppSizes.h16),
                     Row(
                       children: [
                         Selector<HomeController, String?>(
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                               ) => controller.userImage,
                         ),
 
-                        SizedBox(width: 14),
+                        SizedBox(width: AppSizes.w14),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -84,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: AppSizes.h16),
                     Text(
                       "Yuhuu ,Your work Is ",
                       style: Theme.of(context).textTheme.displayLarge,
@@ -95,21 +96,24 @@ class HomeScreen extends StatelessWidget {
                           "almost done !",
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
-                        SizedBox(width: 8),
+                        SizedBox(width: AppSizes.w8),
                         SvgPicture.asset(
                           "assets/images/waving_hand.svg",
-                          width: 32,
-                          height: 32,
+                          width: AppSizes.w32,
+                          height: AppSizes.h32,
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: AppSizes.h16),
                     AchievedTasks(),
-                    SizedBox(height: 8),
+                    SizedBox(height: AppSizes.h8),
                     HighPriorityTasksWidget(),
-                    SizedBox(height: 8),
+                    SizedBox(height: AppSizes.h8),
                     Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
+                      padding: EdgeInsets.only(
+                        top: AppSizes.h24,
+                        bottom: AppSizes.h16,
+                      ),
                       child: Text(
                         "My Tasks",
                         style: Theme.of(context).textTheme.titleLarge,
@@ -123,8 +127,8 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: SizedBox(
-          width: 170,
-          height: 40,
+          width: AppSizes.w170,
+          height: AppSizes.h40,
           child: Builder(
             builder: (BuildContext context) {
               return FloatingActionButton.extended(

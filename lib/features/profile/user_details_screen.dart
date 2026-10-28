@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/widgets/custom_text_form_field.dart';
 
 import '../../core/constants/storage_key.dart';
@@ -86,9 +87,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     ),
               Spacer(),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(MediaQuery.of(context).size.width, 40),
-                ),
                 onPressed: () async {
                   if (_key.currentState!.validate()) {
                     await PreferencesManager().setString(
@@ -104,6 +102,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 },
                 child: Text("Save Changes"),
               ),
+              SizedBox(height: AppSizes.h16),
             ],
           ),
         ),
