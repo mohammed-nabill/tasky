@@ -125,11 +125,11 @@ ThemeData darkTheme = ThemeData(
     filled: true,
     fillColor: Color(0xFF282828),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide.none,
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide(color: Colors.red, width: 0.5),
     ),
     hintStyle: TextStyle(
@@ -140,9 +140,9 @@ ThemeData darkTheme = ThemeData(
   ),
   checkboxTheme: CheckboxThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(4),
+      borderRadius: BorderRadiusGeometry.circular(AppSizes.r4),
     ),
-    side: BorderSide(width: 2, color: Color(0xFF6E6E6E)),
+    side: BorderSide(width: AppSizes.w2, color: Color(0xFF6E6E6E)),
   ),
 
   iconTheme: IconThemeData(color: Color(0xFFFFFCFC)),
@@ -178,7 +178,7 @@ ThemeData darkTheme = ThemeData(
     ),
     shadowColor: Color(0xFF15B86C),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       side: BorderSide(width: 1, color: Color(0xFF15B86C)),
     ),
   ),

@@ -52,7 +52,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     return Scaffold(
       appBar: AppBar(titleSpacing: 0, title: Text("User Details")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.w16),
         child: Form(
           key: _key,
           child: Column(
@@ -70,7 +70,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                         return null;
                       },
                     ),
-              SizedBox(height: 20),
+              SizedBox(height: AppSizes.h20),
               isLoadingMotivationQuote
                   ? CircularProgressIndicator()
                   : CustomTextFormField(

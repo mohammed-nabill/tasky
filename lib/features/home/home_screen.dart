@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                                 Widget? child,
                               ) {
                                 return CircleAvatar(
-                                  radius: 24,
+                                  radius: AppSizes.r24,
                                   backgroundImage: userImage == null
                                       ? AssetImage("assets/images/person.png")
                                       : FileImage(File(userImage)),

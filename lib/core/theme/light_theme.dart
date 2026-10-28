@@ -124,19 +124,19 @@ ThemeData lightTheme = ThemeData(
     filled: true,
     fillColor: Color(0xFFFFFFFF),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide(color: Colors.red, width: 0.5),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(AppSizes.r16),
       borderSide: BorderSide(color: Color(0xFFD1DAD6), width: 0.5),
     ),
     hintStyle: TextStyle(
@@ -147,9 +147,9 @@ ThemeData lightTheme = ThemeData(
   ),
   checkboxTheme: CheckboxThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(4),
+      borderRadius: BorderRadiusGeometry.circular(AppSizes.r4),
     ),
-    side: BorderSide(width: 2, color: Color(0xFFD1DAD6)),
+    side: BorderSide(width: AppSizes.w2, color: Color(0xFFD1DAD6)),
   ),
 
   iconTheme: IconThemeData(color: Color(0xFF161F1B)),
@@ -183,6 +183,8 @@ ThemeData lightTheme = ThemeData(
         color: Colors.black,
       ),
     ),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppSizes.r16),
+    ),
   ),
 );

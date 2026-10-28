@@ -9,6 +9,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/profile/user_details_screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 
+import '../../core/constants/app_sizes.dart';
 import '../../core/services/preferences_manager.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 
@@ -48,12 +49,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return isLoading
         ? CircularProgressIndicator()
         : Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(AppSizes.w16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 4),
+                  padding: EdgeInsets.only(top: AppSizes.h4),
                   child: Text(
                     "My Profile",
                     style: Theme.of(context).textTheme.labelLarge,
@@ -62,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Center(
                   child: Column(
                     children: [
-                      SizedBox(height: 8),
+                      SizedBox(height: AppSizes.h8),
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -70,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             backgroundImage: userImage == null
                                 ? AssetImage('assets/images/person.png')
                                 : FileImage(File(userImage!)),
-                            radius: 60,
+                            radius: AppSizes.r60,
                             backgroundColor: Colors.transparent,
                           ),
                           GestureDetector(
@@ -82,20 +83,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   });
                                 }),
                             child: Container(
-                              height: 45,
-                              width: 45,
+                              height: AppSizes.h45,
+                              width: AppSizes.w45,
                               decoration: BoxDecoration(
                                 color: Theme.of(
                                   context,
                                 ).colorScheme.primaryContainer,
-                                borderRadius: BorderRadius.circular(100),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.r100,
+                                ),
                               ),
                               child: Icon(Icons.camera_alt_outlined),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: AppSizes.h4),
                       Text(name, style: Theme.of(context).textTheme.labelLarge),
                       Text(
                         motivationQuote,
@@ -104,12 +107,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 Text(
                   "Profile Info",
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                SizedBox(height: 22),
+                SizedBox(height: AppSizes.h22),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   onTap: () async {
@@ -213,11 +216,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   selectedFile(image);
                 }
               },
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppSizes.w16),
               child: Row(
                 children: [
                   Icon(Icons.camera_alt_outlined),
-                  SizedBox(width: 8),
+                  SizedBox(width: AppSizes.w8),
                   Text("Camera"),
                 ],
               ),
@@ -232,11 +235,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   selectedFile(image);
                 }
               },
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppSizes.w16),
               child: Row(
                 children: [
                   Icon(Icons.photo),
-                  SizedBox(width: 8),
+                  SizedBox(width: AppSizes.w8),
                   Text("Gallery"),
                 ],
               ),
