@@ -4,6 +4,7 @@ import 'package:tasky/features/home/home_screen.dart';
 import 'package:tasky/features/profile/profile_screen.dart';
 import 'package:tasky/features/tasks/todo_tasks_screen.dart';
 
+import '../../core/constants/app_sizes.dart';
 import '../tasks/complete_tasks_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -34,11 +35,11 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _currentScreenIndex,
 
         selectedLabelStyle: TextStyle(
-          fontSize: 12,
+          fontSize: AppSizes.sp12,
           fontWeight: FontWeight.w500,
         ),
         unselectedLabelStyle: TextStyle(
-          fontSize: 12,
+          fontSize: AppSizes.sp12,
           fontWeight: FontWeight.w500,
         ),
         items: [

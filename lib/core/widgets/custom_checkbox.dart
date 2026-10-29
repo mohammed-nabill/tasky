@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/app_sizes.dart';
+
 class CustomCheckbox extends StatelessWidget {
   const CustomCheckbox({
     super.key,
@@ -15,7 +17,7 @@ class CustomCheckbox extends StatelessWidget {
     return Checkbox(
       activeColor: Color(0XFF15B86C),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(4),
+        borderRadius: BorderRadiusGeometry.circular(AppSizes.r4),
       ),
       value: value,
       onChanged: (bool? value) => onChanged(value),

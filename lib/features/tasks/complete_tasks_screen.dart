@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tasky/features/tasks/controller/tasks_controller.dart';
 
 import '../../core/components/task_list_widget.dart';
+import '../../core/constants/app_sizes.dart';
 
 class CompleteTasksScreen extends StatelessWidget {
   const CompleteTasksScreen({super.key});
@@ -14,7 +15,7 @@ class CompleteTasksScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: EdgeInsets.all(AppSizes.w18),
           child: Text(
             "Completed Tasks",
             style: Theme.of(context).textTheme.labelLarge,
@@ -22,7 +23,7 @@ class CompleteTasksScreen extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(AppSizes.w16),
             child: Consumer<TasksController>(
               builder:
                   (BuildContext context, TasksController valueController, _) {

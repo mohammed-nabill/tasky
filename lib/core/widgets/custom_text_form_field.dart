@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/app_sizes.dart';
+
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
@@ -23,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: Theme.of(context).textTheme.bodyMedium),
-        SizedBox(height: 8),
+        SizedBox(height: AppSizes.h8),
         TextFormField(
           maxLines: maxLines,
           style: Theme.of(context).textTheme.labelMedium,

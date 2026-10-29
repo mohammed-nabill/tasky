@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(AppSizes.r100),
                 ),
                 label: Text("Add New Task"),
                 icon: Icon(Icons.add),

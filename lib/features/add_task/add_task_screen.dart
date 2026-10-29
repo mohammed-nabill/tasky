@@ -16,7 +16,10 @@ class AddTaskScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(title: Text("New Task")),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.w16,
+              vertical: AppSizes.h8,
+            ),
             child: Form(
               key: controller.form,
               child: Column(
@@ -33,7 +36,7 @@ class AddTaskScreen extends StatelessWidget {
                       return null;
                     },
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppSizes.h20),
                   CustomTextFormField(
                     hintText:
                         "Finish onboarding UI and hand off to\ndevs by Thursday.",
@@ -41,7 +44,7 @@ class AddTaskScreen extends StatelessWidget {
                     title: "Task Description",
                     maxLines: 5,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppSizes.h20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

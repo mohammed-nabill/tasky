@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/models/task_model.dart';
 
 import '../constants/storage_key.dart';
@@ -30,10 +31,10 @@ class TaskItemWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
-      height: 56,
+      height: AppSizes.h56,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSizes.r20),
         border: Border.all(
           color: ThemeController.isDark()
               ? Colors.transparent
@@ -42,12 +43,12 @@ class TaskItemWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 8),
+          SizedBox(width: AppSizes.w8),
           CustomCheckbox(
             value: model.isDone,
             onChanged: (bool? value) => onChanged(value),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: AppSizes.w16),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +68,7 @@ class TaskItemWidget extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       color: Color(0xFFC6C6C6),
-                      fontSize: 14,
+                      fontSize: AppSizes.sp14,
                       overflow: TextOverflow.ellipsis,
                     ),
                     maxLines: 1,
@@ -126,13 +127,16 @@ class TaskItemWidget extends StatelessWidget {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSizes.w16,
+            vertical: AppSizes.h8,
+          ),
           child: Form(
             key: form,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: AppSizes.h30),
                 CustomTextFormField(
                   hintText: "Finish UI design for login screen",
                   controller: taskName,
@@ -144,7 +148,7 @@ class TaskItemWidget extends StatelessWidget {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: AppSizes.h20),
                 CustomTextFormField(
                   hintText:
                       "Finish onboarding UI and hand off to\ndevs by Thursday.",
@@ -152,7 +156,7 @@ class TaskItemWidget extends StatelessWidget {
                   title: "Task Description",
                   maxLines: 5,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: AppSizes.h20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

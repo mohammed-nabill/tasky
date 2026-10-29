@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tasky/features/tasks/controller/tasks_controller.dart';
 
 import '../../core/components/task_list_widget.dart';
+import '../../core/constants/app_sizes.dart';
 
 class HighPriorityScreen extends StatelessWidget {
   const HighPriorityScreen({super.key});
@@ -14,7 +15,7 @@ class HighPriorityScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("High Priority Tasks")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.w16),
         child: Consumer<TasksController>(
           builder:
               (
