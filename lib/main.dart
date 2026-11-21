@@ -6,18 +6,19 @@ import 'package:tasky/features/navigation/main_Screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 
 import 'core/constants/storage_key.dart';
+import 'core/services/file_storage_manager.dart';
 import 'core/services/preferences_manager.dart';
 import 'core/theme/light_theme.dart';
 import 'core/theme/theme_controller.dart';
 import 'features/tasks/controller/tasks_controller.dart';
 
 void main() async {
-  await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   await PreferencesManager().init();
   ThemeController().init();
   String? name = PreferencesManager().getString(StorageKey.userName);
-
+  await FileStorageManager().init();
   runApp(MyApp(name: name));
 }
 

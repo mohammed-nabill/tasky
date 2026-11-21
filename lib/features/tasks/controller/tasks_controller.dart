@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 
-import '../../../core/constants/storage_key.dart';
-import '../../../core/services/preferences_manager.dart';
+import '../../../core/services/file_storage_manager.dart';
 
 class TasksController with ChangeNotifier {
   List<TaskModel> tasks = [];
@@ -20,15 +17,12 @@ class TasksController with ChangeNotifier {
   }
 
   void _loadTasks() async {
-    final encodedTask = PreferencesManager().getString(StorageKey.tasks);
-    if (encodedTask != null) {
-      final taskAfterDecode = jsonDecode(encodedTask) as List<dynamic>;
-      tasks = taskAfterDecode
-          .map((element) => TaskModel.fromJson(element))
-          .toList();
-      _loadData();
-      _calculatePercentage();
-    }
+    final tasksData = await FileStorageManager().loadTasks();
+
+    tasks = tasksData.map((element) => TaskModel.fromJson(element)).toList();
+    _loadData();
+    _calculatePercentage();
+
     notifyListeners();
   }
 
@@ -46,16 +40,21 @@ class TasksController with ChangeNotifier {
     _calculatePercentage();
 
     final updatedTask = tasks.map((element) => element.toJson()).toList();
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+
+    await FileStorageManager().saveTasks(updatedTask);
+
     _loadTasks();
   }
 
-  void deleteTask(int id) {
+  Future<void> deleteTask(int id) async {
     tasks.removeWhere((task) => task.id == id);
     _loadData();
     _calculatePercentage();
+
     final updatedTask = tasks.map((element) => element.toJson()).toList();
-    PreferencesManager().setString(StorageKey.tasks, jsonEncode(updatedTask));
+
+    await FileStorageManager().saveTasks(updatedTask);
+
     notifyListeners();
   }
 

@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/models/task_model.dart';
 
-import '../constants/storage_key.dart';
 import '../enums/task_item_actions_enum.dart';
-import '../services/preferences_manager.dart';
+import '../services/file_storage_manager.dart';
 import '../theme/theme_controller.dart';
 import '../widgets/custom_checkbox.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -177,13 +174,8 @@ class TaskItemWidget extends StatelessWidget {
                 ElevatedButton.icon(
                   onPressed: () async {
                     if (form.currentState!.validate()) {
-                      final taskJson = PreferencesManager().getString(
-                        StorageKey.tasks,
-                      );
-                      List listTasks = [];
-                      if (taskJson != null) {
-                        listTasks = jsonDecode(taskJson);
-                      }
+                      List listTasks = await FileStorageManager().loadTasks();
+
                       final TaskModel newModel = TaskModel(
                         id: model.id,
                         taskName: taskName.text,
@@ -195,11 +187,9 @@ class TaskItemWidget extends StatelessWidget {
                         (element) => element['id'] == model.id,
                       );
                       listTasks[index] = newModel;
-                      final taskEncode = jsonEncode(listTasks);
-                      await PreferencesManager().setString(
-                        StorageKey.tasks,
-                        taskEncode,
-                      );
+
+                      await FileStorageManager().saveTasks(listTasks);
+
                       Navigator.of(context).pop(true);
                     }
                   },

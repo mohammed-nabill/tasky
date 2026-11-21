@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
-import '../../core/constants/storage_key.dart';
-import '../../core/services/preferences_manager.dart';
+import '../../core/services/file_storage_manager.dart';
 import '../../models/task_model.dart';
 
 class AddTaskController with ChangeNotifier {
-
   final TextEditingController taskName = TextEditingController();
 
   final TextEditingController taskDescription = TextEditingController();
@@ -16,31 +12,22 @@ class AddTaskController with ChangeNotifier {
 
   Future<void> addTask(BuildContext context) async {
     if (form.currentState!.validate()) {
-      final taskJson = PreferencesManager().getString(
-        StorageKey.tasks,
-      );
-      List listTasks = [];
-      if (taskJson != null) {
-        listTasks = jsonDecode(taskJson);
-      }
+      final List tasks = await FileStorageManager().loadTasks();
+
       final TaskModel model = TaskModel(
         id: DateTime.now().millisecondsSinceEpoch,
         taskName: taskName.text,
         taskDescription: taskDescription.text,
         highPriority: highPriority,
       );
-      listTasks.add(model.toJson());
-
-      final taskEncode = jsonEncode(listTasks);
-      await PreferencesManager().setString(
-        StorageKey.tasks,
-        taskEncode,
-      );
+      tasks.add(model.toJson());
+      await FileStorageManager().saveTasks(tasks);
       Navigator.of(context).pop(true);
     }
   }
-  void toggle(bool value){
-highPriority = value;
-notifyListeners();
+
+  void toggle(bool value) {
+    highPriority = value;
+    notifyListeners();
   }
 }
