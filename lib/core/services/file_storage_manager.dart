@@ -30,4 +30,8 @@ class FileStorageManager {
     final List<dynamic> tasks = jsonDecode(encodedList);
     return tasks;
   }
+
+  Future<void> clear() async {
+    await _tasksFile.delete();
+  }
 }

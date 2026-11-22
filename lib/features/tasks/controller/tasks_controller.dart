@@ -64,4 +64,8 @@ class TasksController with ChangeNotifier {
     percentage = totalTasks == 0 ? 0 : totalDoneTasks / totalTasks;
     notifyListeners();
   }
+
+  clear() {
+    _loadTasks();
+  }
 }
