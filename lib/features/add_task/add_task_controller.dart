@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/services/file_storage_manager.dart';
+import '../../core/services/hive_storage_manager.dart';
 import '../../models/task_model.dart';
 
 class AddTaskController with ChangeNotifier {
@@ -12,7 +12,7 @@ class AddTaskController with ChangeNotifier {
 
   Future<void> addTask(BuildContext context) async {
     if (form.currentState!.validate()) {
-      final List tasks = await FileStorageManager().loadTasks();
+      final List<TaskModel> tasks = HiveStorageManager().loadTasks();
 
       final TaskModel model = TaskModel(
         id: DateTime.now().millisecondsSinceEpoch,
@@ -20,8 +20,8 @@ class AddTaskController with ChangeNotifier {
         taskDescription: taskDescription.text,
         highPriority: highPriority,
       );
-      tasks.add(model.toJson());
-      await FileStorageManager().saveTasks(tasks);
+      tasks.add(model);
+      await HiveStorageManager().saveTasks(tasks);
       Navigator.of(context).pop(true);
     }
   }

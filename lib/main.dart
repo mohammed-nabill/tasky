@@ -6,7 +6,7 @@ import 'package:tasky/features/navigation/main_Screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 
 import 'core/constants/storage_key.dart';
-import 'core/services/file_storage_manager.dart';
+import 'core/services/hive_storage_manager.dart';
 import 'core/services/preferences_manager.dart';
 import 'core/theme/light_theme.dart';
 import 'core/theme/theme_controller.dart';
@@ -18,7 +18,7 @@ void main() async {
   await PreferencesManager().init();
   ThemeController().init();
   String? name = PreferencesManager().getString(StorageKey.userName);
-  await FileStorageManager().init();
+  await HiveStorageManager().init();
   runApp(MyApp(name: name));
 }
 

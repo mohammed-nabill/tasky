@@ -12,7 +12,7 @@ import 'package:tasky/features/tasks/controller/tasks_controller.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 
 import '../../core/constants/app_sizes.dart';
-import '../../core/services/file_storage_manager.dart';
+import '../../core/services/hive_storage_manager.dart';
 import '../../core/services/preferences_manager.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 
@@ -168,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () async {
                     PreferencesManager().remove(StorageKey.motivationQuote);
                     PreferencesManager().remove(StorageKey.userName);
-                    await FileStorageManager().clear();
+                    await HiveStorageManager().clear();
                     context.read<TasksController>().clear();
                     Navigator.pushAndRemoveUntil(
                       context,

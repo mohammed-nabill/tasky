@@ -3,7 +3,7 @@ import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/models/task_model.dart';
 
 import '../enums/task_item_actions_enum.dart';
-import '../services/file_storage_manager.dart';
+import '../services/hive_storage_manager.dart';
 import '../theme/theme_controller.dart';
 import '../widgets/custom_checkbox.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -174,7 +174,8 @@ class TaskItemWidget extends StatelessWidget {
                 ElevatedButton.icon(
                   onPressed: () async {
                     if (form.currentState!.validate()) {
-                      List listTasks = await FileStorageManager().loadTasks();
+                      List<TaskModel> listTasks = HiveStorageManager()
+                          .loadTasks();
 
                       final TaskModel newModel = TaskModel(
                         id: model.id,
@@ -184,11 +185,11 @@ class TaskItemWidget extends StatelessWidget {
                         isDone: model.isDone,
                       );
                       final int index = listTasks.indexWhere(
-                        (element) => element['id'] == model.id,
+                        (element) => element.id == model.id,
                       );
                       listTasks[index] = newModel;
 
-                      await FileStorageManager().saveTasks(listTasks);
+                      await HiveStorageManager().saveTasks(listTasks);
 
                       Navigator.of(context).pop(true);
                     }
